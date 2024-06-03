@@ -1,5 +1,7 @@
 #include <iostream>
 
-int main() {
-  std::cout << "Hello World!\n";
+#include "FileIO.h"
+
+int main(int argc, char **argv) {
+  FileIO fileIO(argc, argv);
 }
