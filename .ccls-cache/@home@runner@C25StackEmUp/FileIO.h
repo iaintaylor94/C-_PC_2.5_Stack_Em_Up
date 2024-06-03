@@ -4,6 +4,10 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
+
+const int NUM_CARDS_IN_DECK = 52;
+const int NUM_VALUES_IN_SUIT = 13;
 
 
 class FileIO {
@@ -17,19 +21,26 @@ void openOut (char*);
 
 
 public:
-FileIO() {};
-FileIO(int argc, char **argv) {
-  if (usage(argc, argv)) {
-    openIn(argv[1]);
-    openOut(argv[1]);
+  FileIO() {};
+  FileIO(int argc, char **argv) {
+    if (usage(argc, argv)) {
+      openIn(argv[1]);
+      openOut(argv[1]);
+    }
   }
-}
-~FileIO() {
-  inFile.close();
-  outFile.close();
-};
+  ~FileIO() {
+    inFile.close();
+    outFile.close();
+  }
 
+  // Accessors
+  int getNumCases (void);
+  int getNumShuffles(void);
+  std::vector<int> getShuffle(void);
+  int getShuffleID (void);
 
+  void printShuffle (std::vector<int>);
+  void printDeck (std::vector<int>);
 };
 
 #endif
