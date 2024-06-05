@@ -32,6 +32,14 @@ public:
     outFile.close();
   }
 
+  // Open Files
+  void openFiles (int argc, char **argv) {
+    if (usage(argc, argv)) {
+      openIn(argv[1]);
+      openOut(argv[1]);
+    }
+  }
+
   // Accessors
   void stripBlank(void);
 

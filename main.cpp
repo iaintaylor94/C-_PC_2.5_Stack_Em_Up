@@ -2,31 +2,23 @@
 
 #include "FileIO.h"
 #include "Dealer.h"
+#include "Stack-em.h"
 
 int main(int argc, char **argv) {
-  FileIO fileIO(argc, argv);
-  Dealer dealer;
+  StackEM stackEM (argc, argv);
 
-  int numCases = fileIO.getNumCases();
-  for (int i = 0; i < numCases; i++) {
+  stackEM.getNumCases();
+  for (int i = 0; i < stackEM.numCases; i++) {
 
     // Get shuffles
-    int numShuffles = fileIO.getNumShuffles();
-    for (int i = 0; i < numShuffles; i++) {
-      dealer.updateShuffles (fileIO.getShuffle());
-    }
+    stackEM.getNumShuffles();
+    stackEM.updateShuffles();
 
-    // Init deck
-    dealer.initDeck();
+    // Process Deck
+    stackEM.processDeck();
 
-    // Get/Process ID
-    int ID = fileIO.getShuffleID();
-    while (ID != -1) {
-      dealer.updateDeck(ID);
-      ID = fileIO.getShuffleID();
-    }
-
-    fileIO.printDeck (dealer.updatedDeck());
+    // Print Deck
+    stackEM.outputDeck();
   }
 
   return 0;
