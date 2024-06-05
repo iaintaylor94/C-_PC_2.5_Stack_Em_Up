@@ -24,6 +24,12 @@ void FileIO::openOut (char *fN) {
 
 
 // Accessors
+  void FileIO::stripBlank() {
+    std::string line;
+    inFile >> line;
+    std::cerr << "stripBlank: " << line << std::endl;
+  }
+
 int FileIO::getNumCases() {
   int numCases = 0;
   inFile >> numCases;
@@ -43,15 +49,23 @@ std::vector<int> FileIO::getShuffle () {
   for (int i = 0; i < NUM_CARDS_IN_DECK; i++) {
     int card = 0;
     inFile >> card;
-    shuffle.push_back(card);
+    shuffle.push_back(card - 1); // 0 .. 52
   }
 
   return shuffle;
 }
 int FileIO::getShuffleID () {
-  int shuffID = 0;
-  inFile >> shuffID;
-  return shuffID;
+  // EOF
+  if (inFile.peek() == EOF) return -1;
+
+  std::string sID;
+  inFile >> sID;
+  
+  // String empty
+  if (sID.length() == 0) return -1;
+  
+  // String not empty
+  return stoi(sID);
 }
 void FileIO::printShuffle (std::vector<int> shuffle) {
   for (auto it = shuffle.begin(); it != shuffle.end(); it++) {

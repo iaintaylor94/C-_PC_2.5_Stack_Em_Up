@@ -1,18 +1,33 @@
 #include <iostream>
 
 #include "FileIO.h"
+#include "Dealer.h"
 
 int main(int argc, char **argv) {
   FileIO fileIO(argc, argv);
+  Dealer dealer;
 
-  std::cerr << fileIO.getNumCases() << std::endl;
-  std::cerr << fileIO.getNumShuffles() << std::endl;
-  fileIO.printShuffle(fileIO.getShuffle());
-  fileIO.printShuffle(fileIO.getShuffle());
+  int numCases = fileIO.getNumCases();
+  for (int i = 0; i < numCases; i++) {
 
-  std::vector<int> originalDeck;
-  for (int i = 0; i < NUM_CARDS_IN_DECK; i++) {
-    originalDeck.push_back(i);
+    // Get shuffles
+    int numShuffles = fileIO.getNumShuffles();
+    for (int i = 0; i < numShuffles; i++) {
+      dealer.updateShuffles (fileIO.getShuffle());
+    }
+
+    // Init deck
+    dealer.initDeck();
+
+    // Get/Process ID
+    int ID = fileIO.getShuffleID();
+    while (ID != -1) {
+      dealer.updateDeck(ID);
+      ID = fileIO.getShuffleID();
+    }
+
+    fileIO.printDeck (dealer.updatedDeck());
   }
-  fileIO.printDeck(originalDeck);
+
+  return 0;
 }

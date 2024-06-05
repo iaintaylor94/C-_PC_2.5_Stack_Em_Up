@@ -47,7 +47,8 @@ The output is:
 >1
 >2                                                                  
 
->**Output**                                         
+>**Output**
+>King of Spades                                           
 >2 of Clubs                                                
 >4 of Clubs                                                
 >5 of Clubs                                                

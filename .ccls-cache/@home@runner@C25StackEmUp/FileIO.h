@@ -6,8 +6,7 @@
 #include <string>
 #include <vector>
 
-const int NUM_CARDS_IN_DECK = 52;
-const int NUM_VALUES_IN_SUIT = 13;
+#include "Cards.h"
 
 
 class FileIO {
@@ -34,6 +33,8 @@ public:
   }
 
   // Accessors
+  void stripBlank(void);
+
   int getNumCases (void);
   int getNumShuffles(void);
   std::vector<int> getShuffle(void);
